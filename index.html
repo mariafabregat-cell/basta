@@ -28,6 +28,7 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
+[id]{scroll-margin-top:calc(var(--nav-h) + env(safe-area-inset-top,0px))}
 html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
@@ -448,7 +449,7 @@ img{max-width:100%}
     </div>
   </section>
 
-  <section class="band">
+  <section class="band" id="senal">
     <div class="wrap stack">
       <span class="eti" style="color:var(--magenta-deep)">Nuestro símbolo</span>
       <h2>La Señal de Ayuda</h2>
@@ -566,7 +567,7 @@ img{max-width:100%}
       <h2>Difunde</h2>
       <div class="difunde">
         <div><h4>Comparte el hashtag</h4><p>Usa #BastaViolenciaInstitucional en todo lo que publiques sobre el congreso.</p><button class="copiar" type="button" id="cp-hashtag" data-c="#BastaViolenciaInstitucional" style="align-self:flex-start">Copiar hashtag</button></div>
-        <div><h4>Aprende la señal</h4><p>Enseña la Señal de Ayuda a tu entorno. Puede salvar a alguien.</p><a class="btn linea" href="#congreso" data-ir="congreso" style="align-self:flex-start">Ver cómo se hace</a></div>
+        <div><h4>Aprende la señal</h4><p>Enseña la Señal de Ayuda a tu entorno. Puede salvar a alguien.</p><a class="btn linea" href="#senal" data-ir="congreso" data-ancla="senal" style="align-self:flex-start">Ver cómo se hace</a></div>
         <div><h4>Comparte la web</h4><p>Envía esta página a quien necesite saber que no está sola.</p><button class="copiar" type="button" id="cp-web" data-c="[WEB]" style="align-self:flex-start">Copiar enlace</button></div>
       </div>
     </div>
@@ -763,7 +764,7 @@ img{max-width:100%}
   });
 
   var h=(location.hash||'').slice(1);
-  if(h==='defendemos')mostrar('congreso','defendemos');
+  if(h==='defendemos'||h==='senal')mostrar('congreso',h);
   else if(h==='adhesion'||h==='expedientes')mostrar('participa',h);
   else mostrar(h||'inicio');
 

@@ -1,2 +1,9 @@
 # basta
-Web del Congreso sobre violencia institucional 
+Web del Congreso sobre violencia institucional
+
+Dirección: https://basta.madresprotectoras.es
+
+- `index.html`: toda la web (inicio, el congreso, programa, participa, colabora, prensa y preguntas).
+- `CNAME`: el dominio propio para GitHub Pages.
+
+Huecos por rellenar (en amarillo en la web): [SEDE], [WEB], [CORREO], [CORREO PRENSA] y [CANAL].

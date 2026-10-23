@@ -50,6 +50,7 @@ p{margin:0;max-width:64ch}
 a{color:inherit;text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
 .magenta :focus-visible{outline-color:var(--ink)}
+.mail{font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 .ph{background:var(--yellow);color:var(--ink);padding:0 4px;font-weight:700;white-space:nowrap}
 .muted{color:var(--grey)}
 .negro .muted{color:var(--grey-on-ink)}
@@ -590,8 +591,8 @@ img{max-width:100%}
   </section>
   <section class="band magenta cierre">
     <div class="wrap">
-      <div class="stack-s"><h2>Hablemos</h2><p class="lead">Escríbenos a <span class="ph">[CORREO]</span> y te enviamos el dossier de patrocinio.</p></div>
-      <button class="btn blanco" type="button" id="cp-correo" data-c="[CORREO]">Copiar correo</button>
+      <div class="stack-s"><h2>Hablemos</h2><p class="lead">Escríbenos a <a class="mail" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a> y te enviamos el dossier de patrocinio.</p></div>
+      <button class="btn blanco" type="button" id="cp-correo" data-c="madresprotectorasesp@gmail.com">Copiar correo</button>
     </div>
   </section>
 </div>
@@ -676,8 +677,8 @@ img{max-width:100%}
   </section>
   <section class="band magenta cierre">
     <div class="wrap">
-      <div class="stack-s"><h2>¿Otra duda?</h2><p class="lead">Escríbenos a <span class="ph">[CORREO]</span>.</p></div>
-      <button class="btn blanco" type="button" id="cp-correo2" data-c="[CORREO]">Copiar correo</button>
+      <div class="stack-s"><h2>¿Otra duda?</h2><p class="lead">Escríbenos a <a class="mail" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a>.</p></div>
+      <button class="btn blanco" type="button" id="cp-correo2" data-c="madresprotectorasesp@gmail.com">Copiar correo</button>
     </div>
   </section>
 </div>
@@ -704,7 +705,7 @@ img{max-width:100%}
       <span class="eti" style="color:var(--grey-on-ink)">Organizan</span>
       <span>DHIDES</span><span>Madres Protectoras de España</span><span>MyC</span>
       <span class="eti" style="color:var(--grey-on-ink);margin-top:10px">Contacto</span>
-      <span class="ph" style="align-self:flex-start">[CORREO]</span>
+      <a class="mail" href="mailto:madresprotectorasesp@gmail.com" style="color:var(--paper)">madresprotectorasesp@gmail.com</a>
     </div>
     <div class="base"><span>La violencia también lleva sello oficial.</span><span>Logo: la Señal de Ayuda, de la Canadian Women's Foundation.</span></div>
   </div>
@@ -793,7 +794,7 @@ img{max-width:100%}
     res.hidden=false;
     if(!nombre||!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){res.innerHTML='<b>Faltan datos.</b><span>Escribe tu nombre y un correo electrónico válido.</span>';return}
     if(!f.priv.checked){res.innerHTML='<b>Falta tu consentimiento.</b><span>Marca la casilla de tratamiento de datos para continuar.</span>';return}
-    res.innerHTML='<b>La adhesión se abre el 25 de noviembre.</b><span>Todavía no se ha enviado nada. Guarda esta página y vuelve ese día, o escríbenos a [CORREO].</span>';
+    res.innerHTML='<b>La adhesión se abre el 25 de noviembre.</b><span>Todavía no se ha enviado nada. Guarda esta página y vuelve ese día, o escríbenos a madresprotectorasesp@gmail.com.</span>';
   });
 })();
 </script>

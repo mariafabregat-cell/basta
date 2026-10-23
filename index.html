@@ -265,6 +265,12 @@ footer .col a{text-decoration:none;color:var(--grey-on-ink)}
 footer .col a:hover{color:var(--paper)}
 footer .base{grid-column:1/-1;border-top:1px solid var(--line-on-ink);padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--grey-on-ink)}
 
+.contacto{background:var(--yellow);color:var(--ink);border-top:2px solid var(--ink)}
+.contacto .in{max-width:1120px;margin:0 auto;padding-block:28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.contacto .mail.grande{font:900 clamp(26px,4vw,44px)/1 var(--display);text-transform:none;text-decoration:none;flex:1;min-width:0}
+.contacto .mail.grande:hover{text-decoration:underline}
+.menu-mail{display:none}
+@media (max-width:960px){.menu .menu-mail{display:block}.menu .menu-mail a{font:700 16px/1.3 var(--sans);text-transform:none;border:0;color:var(--grey-on-ink);padding-top:20px}}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:14px 20px;font:700 15px/1.3 var(--sans);border:2px solid var(--magenta);z-index:70;max-width:calc(100% - 32px)}
 
 @media (max-width:560px){.wrap{padding-block:60px}}
@@ -324,6 +330,7 @@ img{max-width:100%}
       <li><a href="#prensa" data-ir="prensa">Prensa</a></li>
       <li><a href="#preguntas" data-ir="preguntas">Preguntas</a></li>
       <li class="cta"><a href="#participa" data-ir="participa" data-ancla="adhesion">Adhiérete</a></li>
+      <li class="menu-mail"><a class="mail" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a></li>
     </ul>
   </div>
 </header>
@@ -351,6 +358,7 @@ img{max-width:100%}
           <div class="sub">Congreso contra la<br>Violencia Institucional</div>
           <span class="aviso">25 de noviembre de 2026 · Barcelona</span>
           <p class="lema">La violencia también lleva sello oficial.</p>
+          <p class="lema">Contacto: <a class="mail" href="mailto:madresprotectorasesp@gmail.com" style="color:var(--paper)">madresprotectorasesp@gmail.com</a></p>
         </div>
       </div>
       <div class="cuenta" aria-live="polite">
@@ -493,7 +501,7 @@ img{max-width:100%}
         <div class="bloque"><span class="hora">Acción</span><div class="stack-s"><h4>Presentación de la acción colectiva</h4><p>Cómo será la querella, cómo adherirse y cómo enviar un expediente.</p></div><span class="estado ok">Confirmado</span></div>
         <div class="bloque"><span class="hora">Cierre</span><div class="stack-s"><h4>Basta</h4><p>Lectura del manifiesto y apertura oficial de la adhesión.</p></div><span class="estado">Por confirmar</span></div>
       </div>
-      <p class="muted">Ponentes, horarios y sede se anunciarán en esta página y en redes con #BastaViolenciaInstitucional.</p>
+      <p class="muted">Ponentes, horarios y sede se anunciarán en esta página y en redes con #BastaViolenciaInstitucional. Para cualquier duda, escribe a <a class="mail" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a>.</p>
     </div>
   </section>
   <section class="band magenta cierre">
@@ -546,6 +554,7 @@ img{max-width:100%}
             <li><div><b>Revisión jurídica y antropológica</b>Las especialistas de MyC y DHIDES estudian tu caso.</div></li>
             <li><div><b>Te contamos los siguientes pasos</b>Siempre con confidencialidad. Ningún nombre ni expediente se hace público.</div></li>
           </ol>
+          <p style="font-size:15px">Mientras tanto, puedes escribir a <a class="mail" href="mailto:madresprotectorasesp@gmail.com" style="color:var(--paper)">madresprotectorasesp@gmail.com</a>. No adjuntes documentos todavía.</p>
           <p class="muted" style="font-size:15px">No podemos prometer el resultado de la querella ni de ningún procedimiento. Sí podemos prometer que te escucharemos.</p>
         </div>
       </div>
@@ -684,6 +693,14 @@ img{max-width:100%}
 </div>
 
 </main>
+
+<section class="band contacto" aria-label="Contacto">
+  <div class="in">
+    <span class="eti">Contacto</span>
+    <a class="mail grande" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a>
+    <button class="copiar" type="button" id="cp-correo-global" data-c="madresprotectorasesp@gmail.com">Copiar correo</button>
+  </div>
+</section>
 
 <footer class="band negro">
   <div class="wrap">

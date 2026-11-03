@@ -635,6 +635,7 @@ img{max-width:100%}
           <h3>Adhiérete</h3>
           <p>Si eres una persona o una entidad que comparte lo que defendemos, adhiérete a la acción colectiva. Cuantas más firmas, más fuerza.</p>
           <form class="form" id="form-adh" novalidate>
+            <input type="text" name="_honey" id="adh-honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
             <div class="tipo-adh" role="radiogroup" aria-label="Me adhiero como">
               <label><input type="radio" name="tipo" id="tipo-persona" value="persona" checked><span>Persona</span></label>
               <label><input type="radio" name="tipo" id="tipo-entidad" value="entidad"><span>Entidad</span></label>
@@ -642,9 +643,10 @@ img{max-width:100%}
             <div class="campo"><label for="adh-nombre" id="adh-nombre-l">Nombre y apellidos</label><input id="adh-nombre" name="nombre" autocomplete="name" required></div>
             <div class="campo"><label for="adh-email">Correo electrónico</label><input id="adh-email" name="email" type="email" autocomplete="email" required></div>
             <div class="campo"><label for="adh-ciudad">Ciudad</label><input id="adh-ciudad" name="ciudad" autocomplete="address-level2"></div>
+            <label class="check"><input type="checkbox" id="adh-asistir" name="asistir"><span>Quiero asistir al congreso el 26 de noviembre, de 16 a 20 h, en el Campus Catalunya de la URV (Tarragona).</span></label>
             <label class="check"><input type="checkbox" id="adh-publica" name="publica"><span>Quiero que mi nombre aparezca en la lista pública de adhesiones.</span></label>
             <label class="check"><input type="checkbox" id="adh-priv" name="priv" required><span>He leído la <a href="#privacidad" data-ir="privacidad">política de privacidad</a> y acepto el tratamiento de mis datos para gestionar la adhesión.</span></label>
-            <p class="info-datos"><b>Responsable:</b> Madres Protectoras de España. <b>Finalidad:</b> gestionar tu adhesión a la acción colectiva y enviarte información sobre ella. <b>Legitimación:</b> tu consentimiento. <b>Destinatarios:</b> las entidades organizadoras; no se ceden a terceros salvo obligación legal. <b>Derechos:</b> acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a madresprotectorasesp@gmail.com. Más información en la <a href="#privacidad" data-ir="privacidad">política de privacidad</a>.</p>
+            <p class="info-datos"><b>Responsable:</b> Madres Protectoras de España. <b>Finalidad:</b> gestionar tu adhesión a la acción colectiva y enviarte información sobre ella. <b>Legitimación:</b> tu consentimiento. <b>Destinatarios:</b> las entidades organizadoras; el formulario se nos envía por correo a través del servicio FormSubmit. No se ceden a terceros salvo obligación legal. <b>Derechos:</b> acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a madresprotectorasesp@gmail.com. Más información en la <a href="#privacidad" data-ir="privacidad">política de privacidad</a>.</p>
             <button class="btn primario" type="submit" style="align-self:flex-start">Adhiérete <svg aria-hidden="true"><use href="#flecha"/></svg></button>
             <div class="aviso-form" id="adh-res" hidden role="status"></div>
           </form>
@@ -844,7 +846,7 @@ img{max-width:100%}
     <h3>Quién más puede ver tus datos</h3>
     <ul>
       <li>Las otras entidades organizadoras del congreso, DHIDES y MyC, solo para gestionar la acción colectiva.</li>
-      <li>Los proveedores que nos prestan servicios: GitHub (alojamiento de la web) y Google (correo electrónico). Ambos pueden tratar datos en Estados Unidos, con las garantías del Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo.</li>
+      <li>Los proveedores que nos prestan servicios: GitHub (alojamiento de la web), FormSubmit (envío del formulario de adhesión a nuestro correo) y Google (correo electrónico). Ambos pueden tratar datos en Estados Unidos, con las garantías del Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo.</li>
       <li>Las autoridades, cuando una ley nos obligue.</li>
     </ul>
     <p>No vendemos ni cedemos tus datos a nadie más. Tu nombre solo aparecerá en la lista pública de adhesiones si lo marcas expresamente.</p>
@@ -988,7 +990,34 @@ img{max-width:100%}
     res.hidden=false;
     if(!nombre||!email||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){res.innerHTML='<b>Faltan datos.</b><span>Escribe tu nombre y un correo electrónico válido.</span>';return}
     if(!f.priv.checked){res.innerHTML='<b>Falta tu consentimiento.</b><span>Marca la casilla de tratamiento de datos para continuar.</span>';return}
-    res.innerHTML='<b>La adhesión se abre el 26 de noviembre.</b><span>Todavía no se ha enviado nada. Guarda esta página y vuelve ese día, o escríbenos a madresprotectorasesp@gmail.com.</span>';
+    if(f._honey.value){return}
+    var tipo=f.querySelector('input[name="tipo"]:checked').value, btn=f.querySelector('button[type="submit"]');
+    var datos={
+      _subject:'Nueva adhesión BASTA: '+nombre,
+      _template:'table',
+      _replyto:email,
+      'Tipo':tipo==='entidad'?'Entidad':'Persona',
+      'Nombre':nombre,
+      'Correo':email,
+      'Ciudad':f.ciudad.value.trim()||'—',
+      'Asistirá al congreso':f.asistir.checked?'Sí':'No',
+      'Nombre en la lista pública':f.publica.checked?'Sí':'No',
+      'Acepta la privacidad':'Sí',
+      'Fecha':new Date().toLocaleString('es-ES',{timeZone:'Europe/Madrid'})
+    };
+    btn.disabled=true; res.innerHTML='<b>Enviando…</b>';
+    fetch('https://formsubmit.co/ajax/madresprotectorasesp@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
+      .then(function(x){
+        if(x.ok&&String(x.j.success)!=='false'){
+          res.innerHTML='<b>Gracias, '+nombre.replace(/[<>&]/g,'')+'. Ya formas parte de BASTA.</b><span>Hemos recibido tu adhesión'+(f.asistir.checked?' y tu inscripción al congreso del 26 de noviembre':'')+'. Te escribiremos a '+email.replace(/[<>&]/g,'')+'.</span>';
+          f.reset(); lab.textContent='Nombre y apellidos';
+        } else { throw new Error('envio') }
+      })
+      .catch(function(){
+        res.innerHTML='<b>No se ha podido enviar.</b><span>Comprueba tu conexión y vuelve a intentarlo, o escríbenos a madresprotectorasesp@gmail.com.</span>';
+      })
+      .finally(function(){btn.disabled=false});
   });
 })();
 </script>

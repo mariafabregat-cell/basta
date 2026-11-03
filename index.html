@@ -646,7 +646,7 @@ img{max-width:100%}
             <label class="check"><input type="checkbox" id="adh-asistir" name="asistir"><span>Quiero asistir al congreso el 26 de noviembre, de 16 a 20 h, en el Campus Catalunya de la URV (Tarragona).</span></label>
             <label class="check"><input type="checkbox" id="adh-publica" name="publica"><span>Quiero que mi nombre aparezca en la lista pública de adhesiones.</span></label>
             <label class="check"><input type="checkbox" id="adh-priv" name="priv" required><span>He leído la <a href="#privacidad" data-ir="privacidad">política de privacidad</a> y acepto el tratamiento de mis datos para gestionar la adhesión.</span></label>
-            <p class="info-datos"><b>Responsable:</b> Madres Protectoras de España. <b>Finalidad:</b> gestionar tu adhesión a la acción colectiva y enviarte información sobre ella. <b>Legitimación:</b> tu consentimiento. <b>Destinatarios:</b> las entidades organizadoras; el formulario se nos envía por correo a través del servicio FormSubmit y se guarda en la lista de contactos de Madres Protectoras de España en MailerLite. No se ceden a terceros salvo obligación legal. <b>Derechos:</b> acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a madresprotectorasesp@gmail.com. Más información en la <a href="#privacidad" data-ir="privacidad">política de privacidad</a>.</p>
+            <p class="info-datos"><b>Responsable:</b> Madres Protectoras de España. <b>Finalidad:</b> gestionar tu adhesión a la acción colectiva y enviarte información sobre ella. <b>Legitimación:</b> tu consentimiento. <b>Destinatarios:</b> las entidades organizadoras; los datos se guardan en la lista de contactos de Madres Protectoras de España en MailerLite. No se ceden a terceros salvo obligación legal. <b>Derechos:</b> acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a madresprotectorasesp@gmail.com. Más información en la <a href="#privacidad" data-ir="privacidad">política de privacidad</a>.</p>
             <button class="btn primario" type="submit" style="align-self:flex-start">Adhiérete <svg aria-hidden="true"><use href="#flecha"/></svg></button>
             <div class="aviso-form" id="adh-res" hidden role="status"></div>
           </form>
@@ -846,7 +846,7 @@ img{max-width:100%}
     <h3>Quién más puede ver tus datos</h3>
     <ul>
       <li>Las otras entidades organizadoras del congreso, DHIDES y MyC, solo para gestionar la acción colectiva.</li>
-      <li>Los proveedores que nos prestan servicios: GitHub (alojamiento de la web), FormSubmit (envío del formulario de adhesión a nuestro correo), MailerLite (lista de contactos y envío de información sobre la acción colectiva; puedes darte de baja en cualquier correo) y Google (correo electrónico). Algunos de ellos pueden tratar datos en Estados Unidos, con las garantías del Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo.</li>
+      <li>Los proveedores que nos prestan servicios: GitHub (alojamiento de la web), MailerLite (lista de contactos y envío de información sobre la acción colectiva; puedes darte de baja en cualquier correo) y Google (correo electrónico). Algunos de ellos pueden tratar datos en Estados Unidos, con las garantías del Marco de Privacidad de Datos UE-EE. UU. y cláusulas contractuales tipo.</li>
       <li>Las autoridades, cuando una ley nos obligue.</li>
     </ul>
     <p>No vendemos ni cedemos tus datos a nadie más. Tu nombre solo aparecerá en la lista pública de adhesiones si lo marcas expresamente.</p>
@@ -993,30 +993,21 @@ img{max-width:100%}
     if(f._honey.value){return}
     var tipo=f.querySelector('input[name="tipo"]:checked').value, btn=f.querySelector('button[type="submit"]');
     var datos={
-      _subject:'Nueva adhesión BASTA: '+nombre,
-      _template:'table',
-      _replyto:email,
       'Tipo':tipo==='entidad'?'Entidad':'Persona',
       'Nombre':nombre,
       'Correo':email,
       'Ciudad':f.ciudad.value.trim()||'—',
       'Asistirá al congreso':f.asistir.checked?'Sí':'No',
-      'Nombre en la lista pública':f.publica.checked?'Sí':'No',
-      'Acepta la privacidad':'Sí',
-      'Fecha':new Date().toLocaleString('es-ES',{timeZone:'Europe/Madrid'})
+      'Nombre en la lista pública':f.publica.checked?'Sí':'No'
     };
     btn.disabled=true; res.innerHTML='<b>Enviando…</b>';
-    // 1) aviso al correo de Madres Protectoras
-    var fd=new FormData(); Object.keys(datos).forEach(function(k){fd.append(k,datos[k])}); fd.append('_captcha','false');
-    var alCorreo=fetch('https://formsubmit.co/madresprotectorasesp@gmail.com',{method:'POST',mode:'no-cors',body:fd})
-      .then(function(){return true}).catch(function(){return false});
-    // 2) contacto en MailerLite de Madres Protectoras, grupo «Congreso BASTA · Adhesiones»
+    // contacto en MailerLite de Madres Protectoras, grupo «Congreso BASTA · Adhesiones»
     var ml=new URLSearchParams({'fields[email]':email,'fields[name]':nombre,'fields[city]':f.ciudad.value.trim(),'fields[tipo_de_adhesion]':datos['Tipo'],'fields[asistencia_congreso]':datos['Asistirá al congreso'],'fields[lista_publica]':datos['Nombre en la lista pública'],'ml-submit':'1','anticsrf':'true'});
     var aMailerLite=fetch('https://assets.mailerlite.com/jsonp/2766830/forms/203154594918827408/subscribe',{method:'POST',body:ml})
       .then(function(r){return r.json().then(function(j){return r.ok&&j.success!==false})}).catch(function(){return false});
-    Promise.all([alCorreo,aMailerLite])
+    aMailerLite
       .then(function(ok){
-        if(ok[0]||ok[1]){
+        if(ok){
           res.innerHTML='<b>Gracias, '+nombre.replace(/[<>&]/g,'')+'. Ya casi formas parte de BASTA.</b><span>Hemos recibido tu adhesión'+(f.asistir.checked?' y tu inscripción al congreso del 26 de noviembre':'')+'. Te hemos enviado un correo a '+email.replace(/[<>&]/g,'')+': pulsa el botón de confirmación para completarla.</span>';
           f.reset(); lab.textContent='Nombre y apellidos';
         } else { throw new Error('envio') }

@@ -293,8 +293,9 @@ a{color:inherit;text-underline-offset:3px}
 .pasos li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line-on-ink)}
 .pasos li::before{counter-increment:s;content:counter(s);font:900 40px/.85 var(--display);color:var(--magenta)}
 .pasos b{display:block;margin-bottom:4px}
-.difunde{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media (max-width:820px){.difunde{grid-template-columns:1fr}}
+.difunde{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:1100px){.difunde{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.difunde{grid-template-columns:1fr}}
 .difunde > div{border:2px solid var(--paper);padding:24px;display:flex;flex-direction:column;gap:12px}
 
 /* colabora */
@@ -678,6 +679,7 @@ img{max-width:100%}
         <div><h4>Comparte el hashtag</h4><p>Usa #BastaViolenciaInstitucional en todo lo que publiques sobre el congreso.</p><button class="copiar" type="button" id="cp-hashtag" data-c="#BastaViolenciaInstitucional" style="align-self:flex-start">Copiar hashtag</button></div>
         <div><h4>Aprende la señal</h4><p>Enseña la Señal de Ayuda a tu entorno. Puede salvar a alguien.</p><a class="btn linea" href="#senal" data-ir="congreso" data-ancla="senal" style="align-self:flex-start">Ver cómo se hace</a></div>
         <div><h4>Comparte la web</h4><p>Envía esta página a quien necesite saber que no está sola.</p><button class="copiar" type="button" id="cp-web" data-c="https://basta.madresprotectoras.es" style="align-self:flex-start">Copiar enlace</button></div>
+        <div><h4>Haz un donativo</h4><p>Ayuda a cubrir los gastos de organización del congreso. Tú eliges la cantidad.</p><a class="btn linea" href="https://buy.stripe.com/6oUbIU8Jl1vy79Z8vc6kg00" target="_blank" rel="noopener" style="align-self:flex-start">Dona</a></div>
       </div>
     </div>
   </section>

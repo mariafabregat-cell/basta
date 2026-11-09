@@ -9,5 +9,5 @@ Dirección: https://basta.madresprotectoras.es
 
 Congreso: 26 de noviembre de 2026, de 16 a 20 h, Campus Catalunya de la URV, aula 503, Tarragona.
 
-Huecos por rellenar (en amarillo en la web): [CANAL]. Correo de contacto y de prensa: madresprotectorasesp@gmail.com.
+SEO: `robots.txt`, `sitemap.xml`, `og.png` (imagen para compartir, 1200x630) y datos de evento (schema.org) en la cabecera. Correo de contacto y de prensa: madresprotectorasesp@gmail.com.
 Datos legales por rellenar (aviso legal y privacidad): [NIF], [DOMICILIO] y [REGISTRO DE ASOCIACIONES Y NÚMERO].

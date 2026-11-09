@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://basta.madresprotectoras.es/sitemap.xml

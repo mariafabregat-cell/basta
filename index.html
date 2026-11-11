@@ -342,6 +342,8 @@ a{color:inherit;text-underline-offset:3px}
 .check{display:flex;gap:12px;align-items:flex-start;font-size:15px}
 .check input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--magenta);flex:none}
 .aviso-form{border:2px solid var(--ink);background:var(--yellow);padding:16px 18px;font-size:15px;display:flex;flex-direction:column;gap:6px}
+.aviso-form .dona-extra{margin-top:10px;padding-top:12px;border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:10px}
+.aviso-form .dona-extra .btn{align-self:flex-start;padding:12px 18px;font-size:15px}
 .pasos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;counter-reset:s}
 .pasos li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line-on-ink)}
 .pasos li::before{counter-increment:s;content:counter(s);font:900 40px/.85 var(--display);color:var(--magenta)}
@@ -664,6 +666,7 @@ img{max-width:100%}
         <div class="bloque"><span class="hora">19:30</span><div class="stack-s"><h4>BASTA · Manifiesto y querella colectiva</h4><p>Lectura colectiva del manifiesto. Presentación de la acción colectiva: en qué consistirá la querella, cómo adherirse y qué documentación será necesaria. Apertura oficial de las adhesiones.</p></div><span class="estado ok">Acción</span></div>
       </div>
       <p class="muted">Entrada libre con inscripción previa en esta web. Para cualquier duda, escribe a <a class="mail" href="mailto:madresprotectorasesp@gmail.com">madresprotectorasesp@gmail.com</a>.</p>
+      <p class="muted">BASTA se sostiene con donaciones y patrocinios. Si quieres ayudar a que esta jornada sea posible, puedes <a class="mail" href="https://donate.stripe.com/6oUbIU8Jl1vy79Z8vc6kg00" target="_blank" rel="noopener">hacer un donativo</a> de la cantidad que quieras.</p>
     </div>
   </section>
   <section class="band magenta cierre">
@@ -958,6 +961,7 @@ img{max-width:100%}
       <a href="#programa" data-ir="programa">Programa</a>
       <a href="#participa" data-ir="participa">Participa</a>
       <a href="#colabora" data-ir="colabora">Colabora</a>
+      <a href="#colabora" data-ir="colabora" data-ancla="dona">Dona</a>
       <a href="#prensa" data-ir="prensa">Prensa</a>
       <a href="#preguntas" data-ir="preguntas">Preguntas</a>
     </div>
@@ -1072,7 +1076,8 @@ img{max-width:100%}
     aMailerLite
       .then(function(ok){
         if(ok){
-          res.innerHTML='<b>Gracias, '+nombre.replace(/[<>&]/g,'')+'. Ya casi formas parte de BASTA.</b><span>Hemos recibido tu adhesión'+(f.asistir.checked?' y tu inscripción al congreso del 26 de noviembre':'')+'. Te hemos enviado un correo a '+email.replace(/[<>&]/g,'')+': pulsa el botón de confirmación para completarla.</span>';
+          res.innerHTML='<b>Gracias, '+nombre.replace(/[<>&]/g,'')+'. Ya casi formas parte de BASTA.</b><span>Hemos recibido tu adhesión'+(f.asistir.checked?' y tu inscripción al congreso del 26 de noviembre':'')+'. Te hemos enviado un correo a '+email.replace(/[<>&]/g,'')+': pulsa el botón de confirmación para completarla.</span>'
+            +'<div class="dona-extra"><span>Y si además quieres ayudar a cubrir los gastos de organización del congreso (producción, materiales y coordinación), puedes hacer un donativo. Tú eliges la cantidad.</span><a class="btn linea" href="https://donate.stripe.com/6oUbIU8Jl1vy79Z8vc6kg00" target="_blank" rel="noopener">Haz un donativo <svg aria-hidden="true"><use href="#flecha"/></svg></a></div>';
           f.reset(); lab.textContent='Nombre y apellidos';
         } else { throw new Error('envio') }
       })
